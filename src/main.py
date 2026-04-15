@@ -1,13 +1,21 @@
+import sys
+
 from textnode import TextNode, TextType
 from copy_static import copy_static_to_public
 from generate_page import generate_page, generate_pages_recursive
 
 def main():
-    copy_static_to_public("static", "public")
+    basepath = "/"
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+
+    copy_static_to_public("static", "docs")
+
     generate_pages_recursive(
         "content",
         "template.html",
-        "public"
+        "docs",
+        basepath
     )
 
 main()
